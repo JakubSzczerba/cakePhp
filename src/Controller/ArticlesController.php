@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Component\FlashComponent;
+use Cake\Http\Exception\NotFoundException;
 
 /**
  * Articles Controller
@@ -60,6 +61,9 @@ class ArticlesController extends AppController
             $this->Flash->error(__('Unable to add your article.'));
         }
         $this->set('article', $article);
+
+        $categories = $this->Articles->Categories->find('treeList')->all();
+        $this->set(compact('categories'));
     }
 
     /**
