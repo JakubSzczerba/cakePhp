@@ -73,20 +73,15 @@ class CategoriesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('parent_id')
-            ->allowEmptyString('parent_id');
-
+            ->add('id', 'valid', ['rule' => 'numeric'])
+            ->allowEmptyString('id', 'create');
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->requirePresence('name', 'create')
-            ->notEmptyString('name');
-
+            ->add('lft', 'valid', ['rule' => 'numeric']);
+        // ->requirePresence('lft', 'create')->notEmpty('lft');
         $validator
-            ->scalar('description')
-            ->maxLength('description', 255)
-            ->requirePresence('description', 'create')
-            ->notEmptyString('description');
+            ->add('rght', 'valid', ['rule' => 'numeric']);
+        // ->requirePresence('rght', 'create')->notEmpty('rght');
+
 
         return $validator;
     }
