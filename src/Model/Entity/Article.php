@@ -30,5 +30,6 @@ class Article extends Entity
         'body' => true,
         'created' => true,
         'modified' => true,
+        'category_id'=> true
     ];
 }
