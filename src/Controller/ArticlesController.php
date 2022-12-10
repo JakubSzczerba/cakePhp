@@ -18,9 +18,7 @@ class ArticlesController extends AppController
      */
     public function index()
     {
-        $articles = $this->paginate($this->Articles);
-
-        $this->set(compact('articles'));
+        $this->set('articles', $this->Articles->find()->all());
     }
 
     /**
@@ -32,10 +30,7 @@ class ArticlesController extends AppController
      */
     public function view($id = null)
     {
-        $article = $this->Articles->get($id, [
-            'contain' => [],
-        ]);
-
+        $article = $this->Articles->get($id);
         $this->set(compact('article'));
     }
 
