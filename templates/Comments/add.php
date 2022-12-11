@@ -20,7 +20,6 @@
                 <?php
                     echo $this->Form->control('author');
                     echo $this->Form->control('content');
-                    echo $this->Form->control('likes');
                     echo $this->Form->control('article_id', ['options' => $articles]);
                 ?>
             </fieldset>
