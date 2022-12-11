@@ -30,6 +30,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
+    <?= $this->Html->script('https://code.jquery.com/jquery.min.js'); ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -41,8 +42,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <?php if ($identity = $this->request->getAttribute('authentication')->getIdentity()): ?>
+                <p><?= $this->Html->link("Logout", 'users/logout') ?></p>
+            <?php else: ?>
+                <p><?= $this->Html->link("Login", 'users/login') ?></p>
+            <?php endif; ?>
         </div>
     </nav>
     <main class="main">

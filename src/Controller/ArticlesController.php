@@ -121,11 +121,6 @@ class ArticlesController extends AppController
 
         $this->Flash->success('Comment has been liked.');
 
-        /*
-            $identity = $this->request->getAttribute('authentication')->getIdentity();
-            $userId = $identity['id'];
-        */
-
         return $this->redirect($this->referer(['action' => 'index']));
     }
 
