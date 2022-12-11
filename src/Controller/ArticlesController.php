@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\Controller\Component\FlashComponent;
 use Cake\Http\Exception\NotFoundException;
+use Cake\ORM\Locator\LocatorAwareTrait;
 
 /**
  * Articles Controller
@@ -42,6 +43,10 @@ class ArticlesController extends AppController
     {
         $article = $this->Articles->get($id);
         $this->set(compact('article'));
+
+        $comments = $this->getTableLocator()->get('Comments')->find();
+        $comments->where(['article_id' => $id]);
+        $this->set(compact('comments'));
     }
 
     /**
