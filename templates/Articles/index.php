@@ -5,6 +5,7 @@
         <th>Id</th>
         <th>Title</th>
         <th>Created</th>
+        <th>Comment</th>
         <th>Action</th>
     </tr>
     <?php foreach ($articles as $article): ?>
@@ -15,6 +16,9 @@
             </td>
             <td>
                 <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Add', ['action' => 'edit', $article->id]) ?>
             </td>
             <td>
                 <?= $this->Form->postLink(
