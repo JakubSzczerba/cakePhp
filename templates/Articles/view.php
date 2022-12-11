@@ -9,7 +9,10 @@
             <td><?= $comment->author ?></td>
             <td><small>Created: <?= $comment->created->format(DATE_RFC850) ?></small></td>
             <td><?= $comment->content ?></td>
-            <td><?= $comment->likes ?> likes</td>
+            <td>
+                <?= $this->Html->link('Polub', ['action' => 'likeUp', $comment->id]) ?>
+            </td>
+            <td><?= $comment->likes ?> polubień</td>
         </tr>
     <?php endforeach; ?>
 </table>

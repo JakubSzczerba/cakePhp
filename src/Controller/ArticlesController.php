@@ -11,6 +11,7 @@ use Cake\ORM\Locator\LocatorAwareTrait;
  * Articles Controller
  *
  * @property \App\Model\Table\ArticlesTable $Articles
+ * @property \App\Model\Table\CommentsTable $Comments
  * @method \App\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ArticlesController extends AppController
@@ -20,7 +21,6 @@ class ArticlesController extends AppController
         parent::initialize();
         $this->loadComponent('Flash');
     }
-
 
     /**
      * Index method
@@ -107,5 +107,15 @@ class ArticlesController extends AppController
             $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
+    }
+
+    public function likeUp($id = null)
+    {
+        $comment = $this->getTableLocator()->get('Comments')->get($id);
+        $comment->likes = 1;
+
+        $this->Flash->success('Comment has been liked.');
+
+        return $this->redirect($this->referer(['action' => 'index']));
     }
 }
