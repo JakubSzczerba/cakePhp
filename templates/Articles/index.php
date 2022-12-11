@@ -18,7 +18,7 @@
                 <?= $article->created->format(DATE_RFC850) ?>
             </td>
             <td>
-                <?= $this->Html->link('Add', ['action' => 'edit', $article->id]) ?>
+                <?= $this->Html->link('Add', 'comments/add') ?>
             </td>
             <td>
                 <?= $this->Form->postLink(
