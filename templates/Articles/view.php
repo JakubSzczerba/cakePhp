@@ -12,6 +12,13 @@
             <td>
                 <?= $this->Html->link('Polub', ['action' => 'likeUp', $comment->id]) ?>
             </td>
+            <?php if ($comment->likes > 0): ?>
+                <td>
+                    <?= $this->Html->link('Odlub', ['action' => 'likeDown', $comment->id]) ?>
+                </td>
+            <?php else: ?>
+                <td></td>
+            <?php endif; ?>
             <td><?= $comment->likes ?> polubień</td>
         </tr>
     <?php endforeach; ?>

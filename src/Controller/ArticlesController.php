@@ -6,6 +6,7 @@ namespace App\Controller;
 use Cake\Controller\Component\FlashComponent;
 use Cake\Http\Exception\NotFoundException;
 use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\TableRegistry;
 
 /**
  * Articles Controller
@@ -111,10 +112,33 @@ class ArticlesController extends AppController
 
     public function likeUp($id = null)
     {
-        $comment = $this->getTableLocator()->get('Comments')->get($id);
-        $comment->likes = 1;
+        $commentsTable = TableRegistry::getTableLocator()->get('Comments');
+        $comment = $commentsTable->get($id);
+        $likes = $comment->get('likes');
+
+        $comment->likes = $likes + 1;
+        $commentsTable->save($comment);
 
         $this->Flash->success('Comment has been liked.');
+
+        /*
+            $identity = $this->request->getAttribute('authentication')->getIdentity();
+            $userId = $identity['id'];
+        */
+
+        return $this->redirect($this->referer(['action' => 'index']));
+    }
+
+    public function likeDown($id = null)
+    {
+        $commentsTable = TableRegistry::getTableLocator()->get('Comments');
+        $comment = $commentsTable->get($id);
+        $likes = $comment->get('likes');
+
+        $comment->likes = $likes - 1;
+        $commentsTable->save($comment);
+
+        $this->Flash->success('Comment has been unliked.');
 
         return $this->redirect($this->referer(['action' => 'index']));
     }
